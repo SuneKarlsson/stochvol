@@ -32,8 +32,29 @@
 #include "sampling_main.h"
 #include "utils_latent_states.h"
 #include "utils_main.h"
+#include "sampling4sd.h"
 
 using namespace Rcpp;
+
+// svsample_fast_cpp4sd
+//List svsample_fast_cpp4SD(const arma::vec& data, const int draws, const int burnin, const Rcpp::List& priorspec_in, const Rcpp::List& startpara, const arma::vec& startlatent, const Rcpp::List& expert_in);
+RcppExport SEXP _stochvol_svsample_fast_cpp4SD(SEXP dataSEXP, SEXP drawsSEXP, SEXP burninSEXP, SEXP priorspec_inSEXP, SEXP startparaSEXP, SEXP startlatentSEXP, SEXP expert_inSEXP) {
+  BEGIN_RCPP
+  Rcpp::RObject rcpp_result_gen;
+  Rcpp::RNGScope rcpp_rngScope_gen;
+  Rcpp::traits::input_parameter< const arma::vec& >::type data(dataSEXP);
+  Rcpp::traits::input_parameter< const int >::type draws(drawsSEXP);
+  Rcpp::traits::input_parameter< const int >::type burnin(burninSEXP);
+  Rcpp::traits::input_parameter< const Rcpp::List& >::type priorspec_in(priorspec_inSEXP);
+  Rcpp::traits::input_parameter< const Rcpp::List& >::type startpara(startparaSEXP);
+  Rcpp::traits::input_parameter< const arma::vec& >::type startlatent(startlatentSEXP);
+  Rcpp::traits::input_parameter< const Rcpp::List& >::type expert_in(expert_inSEXP);
+  rcpp_result_gen = Rcpp::wrap(stochvol::svsample_fast_cpp4SD(data, draws, burnin, priorspec_in, startpara, startlatent, expert_in));
+  return rcpp_result_gen;
+  END_RCPP
+}
+
+
 
 // svsample_fast_cpp
 RcppExport SEXP _stochvol_svsample_fast_cpp(
@@ -209,6 +230,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_stochvol_get_omori_constants", (DL_FUNC) &_stochvol_get_omori_constants, 0},
     {"_stochvol_geweke_fast_cpp", (DL_FUNC) &_stochvol_geweke_fast_cpp, 0},
     {"_stochvol_geweke_general_cpp", (DL_FUNC) &_stochvol_geweke_general_cpp, 0},
+    {"_stochvol_svsample_fast_cpp4SD", (DL_FUNC) &_stochvol_svsample_fast_cpp4SD, 7},
     {"run_testthat_tests", (DL_FUNC) &run_testthat_tests, 0},
     {"_stochvol_Export_registerCCallable", (DL_FUNC) &_stochvol_Export_registerCCallable, 0},
     {NULL, NULL, 0}
